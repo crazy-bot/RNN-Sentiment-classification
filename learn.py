@@ -89,8 +89,9 @@ class Agent(object):
         # memStart will be any random index within memcounter(the total no of memory stored) - batchsize
         else:
             memStart = int(np.random.choice(range(self.memCounter - batch_size-1)))
+
         # select the minibatch
-        miniBatch = self.memSize[memStart:(memStart+batch_size)]
+        miniBatch = self.memory[memStart:memStart+batch_size]
         memory = np.array(miniBatch)
 
         # feed forward both our network

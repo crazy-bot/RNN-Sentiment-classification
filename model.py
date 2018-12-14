@@ -18,7 +18,7 @@ class DQN(nn.Module):
         self.bn3 = nn.BatchNorm2d(128)
         # output 3*3*128
 
-        self.fc1 = nn.Linear(in_features=3*3*128,out_features=512)
+        self.fc1 = nn.Linear(in_features=128*19*8,out_features=512)
         self.fc2 = nn.Linear(in_features=512, out_features=num_actions)
 
         self.relu = nn.ReLU()
@@ -34,7 +34,7 @@ class DQN(nn.Module):
         # stack of frames and send the variable to device
         X = torch.Tensor(X).to(self.device)
         # reshape the tensor into channel*height*width to feed in conv layer
-        X = X.view(-1,1,84,84) #185*95
+        X = X.view(-1,1,185,95) #185*95
         X = self.net(X)
         X = X.view(X.size(0),-1)
         X = self.relu(self.fc1(X))
